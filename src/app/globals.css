@@ -1,6 +1,18 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+
+html,
+body,
+:root {
+  height: 100%;
+}
+
+@source inline('{sm:,md:,lg:,xl:,2xl:,}grid-cols-{1..16}');
+@source inline('{sm:,md:,lg:,xl:,2xl:,}gap-{0,{1..12},14,16}');
+@source inline('{sm:,md:,lg:,xl:,2xl:,}items-{start,end,center,stretch,baseline}');
+@source inline('{sm:,md:,lg:,xl:,2xl:,}justify-{start,end,center,between,around,evenly}');
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
