@@ -1,7 +1,9 @@
 import { Stack } from "@/components/layout";
-import { ModeToggle } from "@/components/theme-provider";
+import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
+import { UserButton } from "@/components/user-button";
+import { Sparkle } from "lucide-react";
 
 interface IRootLayout {
   children: React.ReactNode;
@@ -50,11 +52,12 @@ const RootLayout = ({ children }: IRootLayout) => {
         >
           <b className="text-xl">Chat Title</b>
 
-          <div className="px-6 py-2 text-sm rounded-3xl bg-violet-200 text-violet-600">Hire Now</div>
-          <span className="size-10 text-xl flex items-center justify-center rounded-full bg-zinc-200">
-            M
-          </span>
-          <ModeToggle/>
+          <Button className=" rounded-3xl hover:bg-indigo-100/60 bg-indigo-100/30 text-indigo-500 dark:hover:bg-indigo-900/70 dark:bg-indigo-900/50 dark:text-indigo-300 font-semibold">
+            <Sparkle className="size-5" />
+            Hire Now
+          </Button>
+
+          <UserButton />
         </Stack>
 
         <Stack justify="center" align="center" className="flex-1">
