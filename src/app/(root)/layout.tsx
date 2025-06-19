@@ -1,4 +1,5 @@
 import { Stack } from "@/components/layout";
+import { ModeToggle } from "@/components/theme-provider";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -53,6 +54,7 @@ const RootLayout = ({ children }: IRootLayout) => {
           <span className="size-10 text-xl flex items-center justify-center rounded-full bg-zinc-200">
             M
           </span>
+          <ModeToggle/>
         </Stack>
 
         <Stack justify="center" align="center" className="flex-1">
