@@ -13,15 +13,14 @@ export function Logo({ className, disabledLink, labeled, ...rest }: LogoProps) {
     <div className="flex items-center justify-center gap-1">
       <div
         className={cn(
-          "relative flex size-9 justify-center items-center rounded-xl text-white bg-primary p-1",
+          "relative flex size-8 justify-center items-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground p-1",
           className
         )}
         {...rest}
       >
-        {/* TODO:PLACE LOGO INSIDE DIV & MODIFY STYLES */}
-        <div className="size-8 bg-neutral-300 rounded-md" />
+        <span className="font-semibold text-lg" >D</span>
       </div>
-      {labeled && <p className="text-xl font-semibold">Acme.</p>}
+      {labeled && <p className="text-xl font-semibold">Devfolio</p>}
     </div>
   );
 

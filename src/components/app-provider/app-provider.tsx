@@ -1,4 +1,5 @@
 import { Toaster } from "@/components/ui/sonner";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
@@ -9,7 +10,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
-      {children}
+      <SidebarProvider>{children}</SidebarProvider>
       <Toaster />
     </ThemeProvider>
   );
