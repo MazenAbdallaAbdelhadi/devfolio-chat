@@ -1,19 +1,20 @@
+import Link from "next/link";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 
 import { ModeToggle } from "@/components/theme-provider";
 
 import { Stack } from "@/components/layout";
 
 import { userInfo } from "@/constants";
+import { cn } from "@/lib/utils";
 
 export const UserButton = () => {
   return (
@@ -24,21 +25,27 @@ export const UserButton = () => {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>My Info</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-
         <DropdownMenuGroup className="px-1">
           {Object.entries(userInfo).map(([key, value]) => (
             <Stack key={key} direction="row" align="center">
               <value.icon className="size-4" />
               <span className="sr-only">{key}</span>
-              <a
+              <Link
                 href={value.href}
                 target={value.target}
-                className={buttonVariants({ variant: "ghost", size: "sm" })}
+                className={cn(
+                  buttonVariants({
+                    variant: key !== "name" ? "link" : "ghost",
+                    size: key === "name" ? "lg" : "sm",
+                  }),
+                  "flex flex-col gap-1 py-4 px-1"
+                )}
               >
-                {value.label}
-              </a>
+                <span>{value.label}</span>
+                <span className="text-xs self-start text-muted-foreground">
+                  {value.href === "/" && (value.caption as string)}
+                </span>
+              </Link>
             </Stack>
           ))}
         </DropdownMenuGroup>
@@ -49,11 +56,6 @@ export const UserButton = () => {
             <span className="text-sm font-semibold">Theme</span>
             <ModeToggle />
           </Stack>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-
-        <DropdownMenuGroup className="py-2 px-1">
-          <Button className="w-full">Hire now</Button>
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

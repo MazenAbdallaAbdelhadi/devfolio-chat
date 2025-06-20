@@ -19,7 +19,7 @@ export const AppSidebarActionButtons = () => {
         <SidebarMenuItem>
           <SidebarMenuButton tooltip="Search Chats">
             <SearchIcon />
-            <span>Search Chats</span>
+            <span>Explore topics</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
         <SidebarMenuItem>

@@ -8,9 +8,10 @@ import {
 
 export const userInfo = {
   name: {
-    label: "mazen abdallah abdalhady",
+    label: "Mazen Abdallah Abdalhady",
+    caption: "Software Engineer",
     icon: UserIcon,
-    href: "#",
+    href: "/",
     target: "_self",
   },
   email: {

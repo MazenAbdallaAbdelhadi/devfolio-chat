@@ -23,7 +23,7 @@ const RootLayout = ({ children }: IRootLayout) => {
         >
           <Stack direction="row">
             <SidebarTrigger size="lg" />
-            <b className="text-xl">Chat Title</b>
+            <b className="text-xl"></b>
           </Stack>
 
           <Button className=" rounded-3xl hover:bg-indigo-100/60 bg-indigo-100/30 text-indigo-500 dark:hover:bg-indigo-900/70 dark:bg-indigo-900/50 dark:text-indigo-300 font-semibold">
@@ -34,7 +34,7 @@ const RootLayout = ({ children }: IRootLayout) => {
           <UserButton />
         </Stack>
 
-        <Stack justify="center" align="center" className="flex-1">
+        <Stack className="flex-1">
           {children}
         </Stack>
       </Stack>
