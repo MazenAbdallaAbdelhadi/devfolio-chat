@@ -34,9 +34,7 @@ const RootLayout = ({ children }: IRootLayout) => {
           <UserButton />
         </Stack>
 
-        <Stack className="flex-1">
-          {children}
-        </Stack>
+        <Stack className="flex-1">{children}</Stack>
       </Stack>
     </Stack>
   );

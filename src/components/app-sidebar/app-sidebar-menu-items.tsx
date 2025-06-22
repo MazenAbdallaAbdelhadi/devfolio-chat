@@ -6,8 +6,14 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Edit3Icon, EllipsisIcon, ShareIcon, Trash2Icon } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { EllipsisIcon } from "lucide-react";
+import { Modal } from "../modal";
 
 const items = [
   {
@@ -52,17 +58,20 @@ export const AppSidebarMenuItems = () => {
               </DropdownMenuTrigger>
 
               <DropdownMenuContent>
-                <DropdownMenuItem>
-                  <ShareIcon/>
-                  <span>Share</span>
+                <DropdownMenuItem  onSelect={(e) => e.preventDefault()}>
+                  <Modal
+                    trigger="✨ Brag About This Chat"
+                    label="Want to flex this conversation?"
+                    caption="Share the link and let the world know how cool I am (and you too, by association). 😎"
+                    placeholder=""
+                    submitLabel="share"
+                  />
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Edit3Icon/>
-                  <span>Edit</span>
+                  <span>💡 Suggest a better title</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem variant="destructive">
-                  <Trash2Icon/>
-                  <span>Delete</span>
+                  <span>🤔 Don’t like this? Roast it</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
