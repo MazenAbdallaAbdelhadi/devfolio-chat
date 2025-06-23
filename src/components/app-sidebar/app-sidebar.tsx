@@ -23,7 +23,7 @@ export const AppSidebar = () => {
         </SidebarGroup>
 
         <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-          <SidebarGroupLabel>Chats</SidebarGroupLabel>
+          <SidebarGroupLabel>Topics</SidebarGroupLabel>
           <AppSidebarMenuItems />
         </SidebarGroup>
       </SidebarContent>

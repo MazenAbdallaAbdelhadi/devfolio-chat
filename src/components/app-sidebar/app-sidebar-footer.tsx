@@ -24,7 +24,7 @@ export const AppSidebarFooter = () => {
             </CardHeader>
             <CardContent className="px-4 group-data-[collapsible=icon]:p-0">
               <SidebarMenuButton
-                tooltip="download CV"
+                tooltip="Let’s Work Together"
                 className="bg-sidebar-primary text-sidebar-primary-foreground hover:bg-sidebar-primary/80 justify-center group-data-[collapsible=icon]:justify-start"
               >
                 <span>🚀 Let’s Work Together</span>
