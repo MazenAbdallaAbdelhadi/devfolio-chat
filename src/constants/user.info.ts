@@ -33,7 +33,7 @@ export const userInfo = {
     target: "_blank",
   },
   linkedin: {
-    label: "linkedin.com/in/mazen-abdallah-abdalhady/",
+    label: "linkedin.com/in/mazen-abdallah-abdalhady",
     icon: LinkedinIcon,
     href: "https://www.linkedin.com/in/mazen-abdallah-abdalhady/",
     target: "_blank",

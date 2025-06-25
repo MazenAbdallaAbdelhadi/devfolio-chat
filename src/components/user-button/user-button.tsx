@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,10 +7,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { buttonVariants } from "@/components/ui/button";
 
 import { ModeToggle } from "@/components/theme-provider";
+import { UserAvatar } from "@/components/user-avatar";
 
 import { Stack } from "@/components/layout";
 
@@ -20,9 +21,7 @@ export const UserButton = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Avatar className="size-10">
-          <AvatarFallback>M</AvatarFallback>
-        </Avatar>
+        <UserAvatar />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuGroup className="px-1">

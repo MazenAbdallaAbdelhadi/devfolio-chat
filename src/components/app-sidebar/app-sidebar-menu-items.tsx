@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { toast } from "sonner";
-import { EllipsisIcon } from "lucide-react";
+import { EllipsisIcon, MessageSquare } from "lucide-react";
 
 import {
   SidebarGroupContent,
@@ -16,18 +16,20 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Modal } from "@/components/modal";
-
-import { chatTopics } from "@/constants";
+import { useChatStore } from "@/store/chat-store";
 
 export const AppSidebarMenuItems = () => {
+  const { chats } = useChatStore();
+
   return (
     <SidebarGroupContent>
       <SidebarMenu>
-        {chatTopics.map((item, i) => (
-          <SidebarMenuItem key={i}>
+        {chats.map((chat) => (
+          <SidebarMenuItem key={chat.id}>
             <SidebarMenuButton>
-              <Link href={item.href} className="text-nowrap truncate">
-                {item.label}
+              <Link href={`/c/${chat.id}`} className="flex items-center gap-2 text-nowrap truncate">
+                <MessageSquare className="h-4 w-4" />
+                {chat.title}
               </Link>
             </SidebarMenuButton>
 

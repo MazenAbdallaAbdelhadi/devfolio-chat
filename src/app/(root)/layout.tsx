@@ -1,9 +1,6 @@
-import { Button } from "@/components/ui/button";
+import { AppSidebar } from "@/components/app-sidebar";
+import { AppHeader } from "@/components/app-header";
 import { Stack } from "@/components/layout";
-import { AppSidebar } from "@/components/app-sidebar/app-sidebar";
-import { UserButton } from "@/components/user-button";
-import { Sparkle } from "lucide-react";
-import { SidebarTrigger } from "@/components/ui/sidebar";
 
 interface IRootLayout {
   children: React.ReactNode;
@@ -11,30 +8,15 @@ interface IRootLayout {
 
 const RootLayout = ({ children }: IRootLayout) => {
   return (
-    <Stack direction="row" className="gap-0 h-screen w-full">
+    <Stack direction="row" className="gap-0 h-full w-full">
       <AppSidebar />
 
-      <Stack className="flex-1 h-full">
-        <Stack
-          direction="row"
-          align="center"
-          justify="between"
-          className="p-4 h-14 border-b"
-        >
-          <Stack direction="row">
-            <SidebarTrigger size="lg" />
-            <b className="text-xl"></b>
-          </Stack>
+      <Stack className="flex-1 h-full relative w-full">
+        <div className="sticky top-0 z-10 bg-background shadow">
+          <AppHeader/>
+        </div>
 
-          <Button className=" rounded-3xl hover:bg-indigo-100/60 bg-indigo-100/30 text-indigo-500 dark:hover:bg-indigo-900/70 dark:bg-indigo-900/50 dark:text-indigo-300 font-semibold">
-            <Sparkle className="size-5" />
-            Hire Now
-          </Button>
-
-          <UserButton />
-        </Stack>
-
-        <Stack className="flex-1">{children}</Stack>
+        <Stack className="flex-1 pt-16">{children}</Stack>
       </Stack>
     </Stack>
   );
