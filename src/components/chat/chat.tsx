@@ -37,6 +37,7 @@ export const Chat = ({ id }: IChatProps) => {
               key={message.id}
               content={message.content}
               role={message.role}
+              animate= {message.animate}
             />
           ))}
         </Stack>

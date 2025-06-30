@@ -1,17 +1,46 @@
+import { NextRequest } from 'next/server'
+import { RateLimiterMemory } from 'rate-limiter-flexible'
+
 import { openai } from '@/lib/openai'
 import { Message } from '@/types'
-import { NextRequest } from 'next/server'
+
+const rateLimiter = new RateLimiterMemory({
+  points: 1, // 1 requests
+  duration: 60 * 5, // 5 minutes
+})
 
 export async function POST(req: NextRequest) {
   try {
+    // Get IP address from x-forwarded-for or fallback to 'unknown'
+    const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+    try {
+      await rateLimiter.consume(ip)
+    } catch {
+      return new Response(
+        JSON.stringify({
+          error: "Whoa there, turbo-typist! 🏎️ You've hit the chat speed limit. Give me a sec to catch my digital breath, then try again in a moment."
+        }),
+        {
+          status: 429,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
+
     const { messages } = await req.json()
 
+    // Inject system prompt for Mazen's witty persona
+    const systemPrompt = {
+      role: 'system',
+      content: "You are Mazen, the witty developer who built this app. Always answer as Mazen, with a clever, playful, and slightly self-aware tone. Make sure your responses are helpful, but never miss a chance for a clever quip or a bit of developer humor."
+    }
+
     const response = await openai.chat.completions.create({
-      model:"deepseek/deepseek-chat:free",
-      messages: messages.map((msg: Message) => ({
+      model: "deepseek/deepseek-chat:free",
+      messages: [systemPrompt, ...messages.map((msg: Message) => ({
         role: msg.role,
         content: msg.content,
-      })),
+      }))],
       stream: true,
     })
 

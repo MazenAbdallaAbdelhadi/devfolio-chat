@@ -11,6 +11,7 @@ import { AppSidebarHeader } from "./app-sidebar-header";
 import { AppSidebarFooter } from "./app-sidebar-footer";
 import { AppSidebarActionButtons } from "./app-sidebar-action-buttons";
 import { AppSidebarMenuItems } from "./app-sidebar-menu-items";
+import { AppSidebarTopics } from "./app-sidebar-topics";
 
 export const AppSidebar = () => {
   return (
@@ -22,8 +23,10 @@ export const AppSidebar = () => {
           <AppSidebarActionButtons />
         </SidebarGroup>
 
+        <AppSidebarTopics />
+
         <SidebarGroup className="group-data-[collapsible=icon]:hidden">
-          <SidebarGroupLabel>Topics</SidebarGroupLabel>
+          <SidebarGroupLabel>Chats</SidebarGroupLabel>
           <AppSidebarMenuItems />
         </SidebarGroup>
       </SidebarContent>

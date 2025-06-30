@@ -8,7 +8,7 @@ interface IRootLayout {
 
 const RootLayout = ({ children }: IRootLayout) => {
   return (
-    <Stack direction="row" className="gap-0 h-full w-full">
+    <Stack direction="row" className="gap-0 min-h-screen w-full">
       <AppSidebar />
 
       <Stack className="flex-1 h-full relative w-full">
@@ -16,7 +16,7 @@ const RootLayout = ({ children }: IRootLayout) => {
           <AppHeader/>
         </div>
 
-        <Stack className="flex-1 pt-16">{children}</Stack>
+        <Stack className="flex-1">{children}</Stack>
       </Stack>
     </Stack>
   );

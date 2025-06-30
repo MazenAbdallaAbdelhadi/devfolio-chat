@@ -3,6 +3,7 @@ export interface Message {
   content: string
   role: 'user' | 'assistant'
   createdAt: Date
+  animate: boolean
 }
 
 export interface Chat {

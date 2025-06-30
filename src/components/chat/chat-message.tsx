@@ -1,25 +1,29 @@
-import { ClassAttributes, HTMLAttributes } from "react";
+import { ClassAttributes, HTMLAttributes, useEffect, useState } from "react";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import ReactMarkdown, { ExtraProps } from "react-markdown";
-import { CopyIcon } from "lucide-react";
+import { CheckIcon, CopyIcon } from "lucide-react";
 import remarkGfm from "remark-gfm";
 import { toast } from "sonner";
 
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { UserAvatar } from "@/components/user-avatar";
 import { Button } from "@/components/ui/button";
 import { Stack } from "@/components/layout";
 
 import { cn } from "@/lib/utils";
-import { ScrollArea } from "../ui/scroll-area";
+import { useAnimatedText } from "@/hooks/use-animated-text";
 
 interface ChatMessageProps {
   content: string;
   role: "user" | "assistant";
+  animate: boolean;
 }
 
-export function ChatMessage({ content, role }: ChatMessageProps) {
+export function ChatMessage({ content, role, animate }: ChatMessageProps) {
   const isUser = role === "user";
+
+  const animatedContent = useAnimatedText(content);
 
   return (
     <Stack align={isUser ? "end" : "start"} className="w-full">
@@ -34,7 +38,7 @@ export function ChatMessage({ content, role }: ChatMessageProps) {
         {isUser ? (
           <p className="whitespace-pre-wrap break-words p-4">{content}</p>
         ) : (
-          <div className="w-full prose dark:prose-invert prose-pre:bg-transparent prose-pre:p-0">
+          <div className="prose !max-w-none dark:prose-invert prose-pre:bg-transparent">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{
@@ -43,7 +47,7 @@ export function ChatMessage({ content, role }: ChatMessageProps) {
                 },
               }}
             >
-              {content}
+              {animate ? animatedContent : content}
             </ReactMarkdown>
           </div>
         )}
@@ -61,8 +65,8 @@ const CodeMarkdown = (
   const match = /language-(\w+)/.exec(className || "");
 
   return match ? (
-    <div className="flex">
-      <ScrollArea>
+    <div className="flex w-full">
+      <ScrollArea className="flex-1">
         <Stack className="relative rounded-md">
           <CodeMarkdownHeader lang={match[1]} content={children} />
           <SyntaxHighlighter
@@ -70,7 +74,7 @@ const CodeMarkdown = (
             style={atomDark}
             language={match[1]}
             PreTag="div"
-            customStyle={{ paddingTop: "4rem", width: "max-content" }}
+            customStyle={{ paddingTop: "4rem", width: "100%" }}
             {...rest}
           >
             {String(children).replace(/\n$/, "")}
@@ -92,6 +96,13 @@ const CodeMarkdownHeader = ({
   lang: string;
   content: React.ReactNode;
 }) => {
+  const [copied, setCopied] = useState(false);
+  let timeout: ReturnType<typeof setTimeout> | undefined;
+
+  useEffect(() => {
+    return () => clearTimeout(timeout);
+  }, [timeout]);
+
   return (
     <Stack
       direction="row"
@@ -105,13 +116,26 @@ const CodeMarkdownHeader = ({
         variant="ghost"
         className="text-xs"
         onClick={() => {
-          navigator.clipboard.writeText(String(content).replace(/\n$/, ""));
-
-          toast.success("Copied");
+          navigator.clipboard
+            .writeText(String(content).replace(/\n$/, ""))
+            .then(() => {
+              setCopied(true);
+              timeout = setTimeout(() => {
+                setCopied(false);
+              }, 3000);
+            })
+            .catch(() => {
+              toast.error("Can't copy!");
+            });
         }}
       >
-        <CopyIcon className="size-3" />
-        copy
+        {copied ? (
+          <CheckIcon className="size-3" />
+        ) : (
+          <CopyIcon className="size-3" />
+        )}
+
+        {copied ? "copied" : "copy"}
       </Button>
     </Stack>
   );
