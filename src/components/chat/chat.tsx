@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { PromptInput } from "@/components/prompt-input";
 import { Stack } from "@/components/layout";
@@ -32,8 +31,7 @@ export const Chat = ({ id }: IChatProps) => {
 
   return (
     <Stack align="center" className="min-h-full px-4 pb-8 pt-4">
-      <ScrollArea className="flex-1 w-[min(600px,calc(100%-3rem))]">
-        <Stack>
+      <Stack className="w-[min(600px,calc(100%-3rem))]">
           {chat.messages.map((message) => (
             <ChatMessage
               key={message.id}
@@ -42,7 +40,6 @@ export const Chat = ({ id }: IChatProps) => {
             />
           ))}
         </Stack>
-      </ScrollArea>
 
       <PromptInput chatId={chat.id} />
     </Stack>

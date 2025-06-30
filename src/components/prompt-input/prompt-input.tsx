@@ -42,7 +42,7 @@ export const PromptInput = ({ chatId }: PromptInputProps) => {
   };
 
   return (
-    <Stack align="center" className="sticky bottom-0 w-full pb-4 pt-8 bg-gradient-to-t from-background via-background/80 to-transparent">
+    <Stack align="center" className="sticky z-20 bottom-0 w-full pb-4 pt-8 bg-gradient-to-t from-background via-background/80 to-transparent">
       <Card className="border-none w-[min(600px,100%)] p-3">
         <form className="flex" onSubmit={handleSubmit}>
           <Textarea

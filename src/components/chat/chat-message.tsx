@@ -27,14 +27,14 @@ export function ChatMessage({ content, role }: ChatMessageProps) {
 
       <div
         className={cn(
-          "w-full p-4 rounded-md",
+          "w-full rounded-md",
           isUser ? "max-w-[80%] bg-card text-card-foreground" : "bg-background"
         )}
       >
         {isUser ? (
-          <p className="whitespace-pre-wrap break-words">{content}</p>
+          <p className="whitespace-pre-wrap break-words p-4">{content}</p>
         ) : (
-          <div className="w-full prose dark:prose-invert prose-pre:bg-transparent">
+          <div className="w-full prose dark:prose-invert prose-pre:bg-transparent prose-pre:p-0">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{
@@ -61,21 +61,23 @@ const CodeMarkdown = (
   const match = /language-(\w+)/.exec(className || "");
 
   return match ? (
-    <ScrollArea>
-      <Stack className="relative w-xs md:w-lg">
-        <CodeMarkdownHeader lang={match[1]} content={children} />
-        <SyntaxHighlighter
-          showInlineLineNumbers
-          style={atomDark}
-          language={match[1]}
-          PreTag="div"
-          customStyle={{ paddingTop: "4rem", borderRadius: "0.65rem" }}
-          {...rest}
-        >
-          {String(children).replace(/\n$/, "")}
-        </SyntaxHighlighter>
-      </Stack>
-    </ScrollArea>
+    <div className="flex">
+      <ScrollArea>
+        <Stack className="relative rounded-md">
+          <CodeMarkdownHeader lang={match[1]} content={children} />
+          <SyntaxHighlighter
+            showInlineLineNumbers
+            style={atomDark}
+            language={match[1]}
+            PreTag="div"
+            customStyle={{ paddingTop: "4rem", width: "max-content" }}
+            {...rest}
+          >
+            {String(children).replace(/\n$/, "")}
+          </SyntaxHighlighter>
+        </Stack>
+      </ScrollArea>
+    </div>
   ) : (
     <code className={className} {...props}>
       {children}
@@ -94,7 +96,8 @@ const CodeMarkdownHeader = ({
     <Stack
       direction="row"
       justify="between"
-      className="absolute w-full top-0 left-0 px-4 py-6"
+      align="center"
+      className="absolute w-full z-10  top-0 left-0 px-4 py-6"
     >
       <span className="text-xs">{lang}</span>
       <Button

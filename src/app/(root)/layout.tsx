@@ -12,7 +12,7 @@ const RootLayout = ({ children }: IRootLayout) => {
       <AppSidebar />
 
       <Stack className="flex-1 h-full relative w-full">
-        <div className="sticky top-0 z-10 bg-background shadow">
+        <div className="sticky top-0 z-50 bg-background shadow">
           <AppHeader/>
         </div>
 
